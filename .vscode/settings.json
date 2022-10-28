@@ -6,5 +6,6 @@
         "jsonify",
         "niko",
         "werkzeug"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
