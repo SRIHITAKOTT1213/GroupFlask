@@ -1,12 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+
+} 
+html{
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: 600;
+}
+section{
+    min-height: 100vh;
+    widows:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+    background-color: burlywood;
+
+}
+.container{
+    width: 90%;
+    height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.brand{
+    text-align: center;
+    font-size: 4rem;
+    color:whitesmoke;
+    margin-bottom: 30px;
+}
+form{
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: aliceblue;
+    border-radius: 4px;
+}
+form input{
+    width: 90%;
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    display: incline-block;
+}
+.search-result{
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-gap: 25px;
+    grid-template: auto / repeat(auto-fit, minmax(300px, 1fr));
+}
+.item{
+    width: 100%;
+    border-radius: 8px;
+    background-color: blanchedalmond;
+    padding: 15px;
+    overflow: hidden;
+}
+.item img{
+    width: 100%;
+    height: 300px;
+    border-radius: 4px;
+}
+.item .flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.item .title{
+    color: rgb(0, 0, 0);
+    margin: 20px 10px 0 0;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+.view-button{
+    text-decoration: none;
+    text-align: center;
+    width: 130px;
+    padding: 10px 0;
+    color: rgb(70, 73, 255);
+    font-size: 1.4rem;
+    margin-top: 20px;
+    align-self: flex-start;
+}
+.item-data{
+    color: rgb(0, 0, 0);
+    display: block;
+    margin-top: 10px;
+    font-size: 1.4rem;
+    letter-spacing: .05 rem;
+    line-height: 2rem;
+}
+</style>
+
 <body>
     <section>
         <div class = "containter">
@@ -16,7 +123,7 @@
             </form>
             <div class="search-result">
                 <div class="item">
-                    <img src="./pizza.png" alt="">
+                    <img src="{{ url_for('static', filename='assets/pizza.png') }}" alt="">
                     <div class="flex-containter">
                         <h1 class="title">This is a recipe</h1>
                         <a class="view-button" href="#">View Recipe</a>
@@ -25,7 +132,7 @@
                 </div>
             <div class="search-result">
                 <div class="item">
-                    <img src="./pizza.png" alt="">
+                    <img src="{{ url_for('static', filename='assets/pizza.png') }}" alt="">
                     <div class="flex-containter">
                         <h1 class="title">This is a recipe</h1>
                         <a class="view-button" href="#">View Recipe</a>
@@ -34,7 +141,7 @@
                 </div>
             <div class="search-result">
                  <div class="item">
-                    <img src="./pizza.png" alt="">
+                    <img src="{{ url_for('static', filename='assets/pizza.png') }}" alt="">
                     <div class="flex-containter">
                         <h1 class="title">This is a recipe</h1>
                         <a class="view-button" href="#">View Recipe</a>
