@@ -1,27 +1,48 @@
-{% extends "layouts/base.html" %}
-{% set project = "Home" %}
-
-{% block body %}
-    <!-- Start of body content specific to page -->
-    <div class="px-5 py-5 mx-auto">
-        <h1 class="text-white"><strong>Loophole Games</strong></h1>
-    </div>
- <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
-        <title>Awesome Search Box</title>
-    </head>
-    <body>
-
-<div class="search-box">
-    <input class="search-txt" type="text" name="" placeholder="Type to search">
-    <a class="search-btn" href="#">
-
-    </a>
-</div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"
+</head>
+<body>
+    <section>
+        <div class = "containter">
+            <h1 class="brand">Recipe App</h1>
+            <form>
+                <input type="text" placeholder="Search Your Recipe...">
+            </form>
+            <div class="search-result">
+                <div class="item">
+                    <img src="./ncs_logo.png" alt="">
+                    <div class="flex-containter">
+                        <h1 class="title">This is a recipe</h1>
+                        <a href="#">View Recipe</a>
+                    </div>
+                    <p class="item-data">Calories: 120</p>
+                </div>
+            <div class="search-result">
+                <div class="item">
+                    <img src="./ncs_logo.png" alt="">
+                    <div class="flex-containter">
+                        <h1 class="title">This is a recipe</h1>
+                        <a href="#">View Recipe</a>
+                    </div>
+                    <p class="item-data">Calories: 120</p>
+                </div>
+            <div class="search-result">
+                 <div class="item">
+                    <img src="./ncs_logo.png" alt="">
+                    <div class="flex-containter">
+                        <h1 class="title">This is a recipe</h1>
+                        <a href="#">View Recipe</a>
+                    </div>
+                    <p class="item-data">Calories: 120</p>
+                    </div>
+            </div>
+        </div>
+    </section>
+</body>
 </html>
-{% endblock %}
-
