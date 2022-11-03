@@ -5,11 +5,11 @@ import requests  # used for testing
 import time
 
 # Blueprints enable python code to be organized in multiple files and directories https://flask.palletsprojects.com/en/2.2.x/blueprints/
-covid_api = Blueprint('covid_api', __name__,
-                   url_prefix='/api/covid')
+recipe_api = Blueprint('recipe_api', __name__,
+                   url_prefix='/api/recipe')
 
 # API generator https://flask-restful.readthedocs.io/en/latest/api.html#id1
-api = Api(covid_api)
+api = Api(recipe_api)
 
 """Time Keeper
 Returns:
@@ -37,15 +37,15 @@ def updateTime():
 Returns:
     String: API response
 """   
-def getCovidAPI():
-    global covid_data  # the covid_data global is preserved between calls to function
-    try: covid_data
-    except: covid_data = None
+def getrecipeAPI():
+    global recipe_data  # the recipe_data global is preserved between calls to function
+    try: recipe_data
+    except: recipe_data = None
 
     """
     Preserve Service usage / speed time with a Reasonable refresh delay
     """
-    if updateTime(): # request Covid data
+    if updateTime(): # request recipe data
         """
         RapidAPI is the world's largest API Marketplace. 
         Developers use Rapid API to discover and connect to thousands of APIs. 
@@ -56,9 +56,9 @@ def getCovidAPI():
             'x-rapidapi-host': "corona-virus-world-and-india-data.p.rapidapi.com"
         }
         response = requests.request("GET", url, headers=headers)
-        covid_data = response
-    else:  # Request Covid Data
-        response = covid_data
+        recipe_data = response
+    else:  # Request recipe Data
+        response = recipe_data
 
     return response
 
@@ -68,8 +68,8 @@ Returns:
     String: Filter of API response
 """   
 def getCountry(filter):
-    # Request Covid Data
-    response = getCovidAPI()
+    # Request recipe Data
+    response = getrecipeAPI()
     # Look for Country    
     countries = response.json().get('countries_stat')
     for country in countries:  # countries is a list
@@ -82,13 +82,13 @@ def getCountry(filter):
 """Defines API Resources 
   URLs are defined with api.add_resource
 """   
-class CovidAPI:
-    """API Method to GET all Covid Data"""
+class recipeAPI:
+    """API Method to GET all recipe Data"""
     class _Read(Resource):
         def get(self):
-            return getCovidAPI().json()
+            return getrecipeAPI().json()
         
-    """API Method to GET Covid Data for a Specific Country"""
+    """API Method to GET recipe Data for a Specific Country"""
     class _ReadCountry(Resource):
         def get(self, filter):
             return jsonify(getCountry(filter))
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     print("-"*30) # cosmetic separator
 
     # This code looks for "world data"
-    response = getCovidAPI()
+    response = getrecipeAPI()
     print("World Totals")
     world = response.json().get('world_total')  # turn response to json() so we can extract "world_total"
     for key, value in world.items():  # this finds key, value pairs in country
