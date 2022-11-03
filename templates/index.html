@@ -134,7 +134,11 @@ form input{
             </div>
         </div>
     <section>
-    
+
+    <py-script>
+        print
+    </py-script>
+
     <script>
         // Font api from google
         //https://fonts.google.com/
@@ -147,7 +151,7 @@ form input{
         const container = document.querySelector('.container');
         let searchQuery = '';
         
-        // get user input
+        // get user input with enter key
         searchForm.addEventListener('submit', (e) => {
             e.preventDefault(); 
             searchQuery = e.target.querySelector('input').value;
@@ -155,7 +159,7 @@ form input{
             fetchAPI();
         });
         
-        // get results from edamam.com
+        // get results from edamam.com and fetches different data 
         async function fetchAPI(){        
             const baseURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchQuery}&app_id=449337d0&app_key=aef635a70d74e161040e5860d97c9ab6`;
             const response = await fetch(baseURL);
@@ -164,7 +168,7 @@ form input{
             generateHTML(data.hits);    
         }
         
-        // prepare HTML using results
+        // prepare HTML using the fetched results (specific things such as calories, diet, etc.) 
         function generateHTML(results){
             container.classList.remove('initial');
             let generatedHTML = '';
