@@ -50,11 +50,11 @@ def getrecipeAPI():
         RapidAPI is the world's largest API Marketplace. 
         Developers use Rapid API to discover and connect to thousands of APIs. 
         """
-        url = "https://corona-virus-world-and-india-data.p.rapidapi.com/api"
+        url = "https://edamam-recipe-search.p.rapidapi.com/search"
         headers = {
-            'x-rapidapi-key': "dec069b877msh0d9d0827664078cp1a18fajsn2afac35ae063",
-            'x-rapidapi-host': "corona-virus-world-and-india-data.p.rapidapi.com"
-        }
+	"X-RapidAPI-Key": "26d9a3c8fbmshd1c8fc32ca8acc3p190a69jsn54f737b8e33b",
+	"X-RapidAPI-Host": "edamam-recipe-search.p.rapidapi.com"
+}
         response = requests.request("GET", url, headers=headers)
         recipe_data = response
     else:  # Request recipe Data
