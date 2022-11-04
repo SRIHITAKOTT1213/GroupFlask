@@ -71,14 +71,18 @@ Returns:
 def getCategory(filter):
     # Request recipe Data
     response = getRecipeAPI()
-    # Look for Country    
-    cats = response.json().get('parsed')
     
-    for cat in cats:  # cats is a list
-        if cat["categoryLabel"].lower() == filter.lower():  # this filters for country
-            return cat
-    
-    return {"message": filter + " not found"}
+    # all recipes are under 'hints'
+    all_rep = response.json().get('hints')
+
+    # two categories : 'Generic meals' / 'Packaged foods'
+    rep_list = []  # store all recipes
+    for rep in all_rep:
+        rep_temp = rep['food']
+        if rep_temp['category'].lower() == filter.lower():
+            rep_list.append(rep)
+            
+    return rep_list
 
 
 """Defines API Resources 
@@ -109,12 +113,12 @@ if __name__ == "__main__":
     There were at least 10 debugging session, on handling updateTime.
     """
     
-    print("-"*30) # cosmetic separator
+    #print("-"*30) # cosmetic separator
 
     # This code looks for Generic foods in "category"
-    gen_food = getCategory("meal")
-    print("meal")
-    for key, value in gen_food.items():
-        print(key, value)
+    #gen_food = getCategory("meal")
+    #print("meal")
+    #for key, value in gen_food.items():
+    #    print(key, value)
         
-    print("-"*30)
+    #print("-"*30)
