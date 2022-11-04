@@ -91,11 +91,11 @@ class CovidAPI:
     """API Method to GET Covid Data for a Specific Country"""
     class _ReadCountry(Resource):
         def get(self, filter):
-            return jsonify(getCountry(filter))
+            return jsonify(getCountry("filter"))
     
     # resource is called an endpoint: base usr + prefix + endpoint
     api.add_resource(_Read, '/')
-    api.add_resource(_ReadCountry, '/<string:filter>')
+    api.add_resource(_ReadCountry, '/<string:filter>')    
 
 
 """Main or Tester Condition 
