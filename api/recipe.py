@@ -37,7 +37,7 @@ def updateTime():
 Returns:
     String: API response
 """   
-def getrecipeAPI():
+def getRecipeAPI():
     global recipe_data  # the recipe_data global is preserved between calls to function
     try: recipe_data
     except: recipe_data = None
@@ -50,12 +50,13 @@ def getrecipeAPI():
         RapidAPI is the world's largest API Marketplace. 
         Developers use Rapid API to discover and connect to thousands of APIs. 
         """
-        url = "https://edamam-recipe-search.p.rapidapi.com/search"
+        url = "https://edamam-food-and-grocery-database.p.rapidapi.com/parser"
+        querystring = {"ingr":"apple"}
         headers = {
-	"X-RapidAPI-Key": "26d9a3c8fbmshd1c8fc32ca8acc3p190a69jsn54f737b8e33b",
-	"X-RapidAPI-Host": "edamam-recipe-search.p.rapidapi.com"
-}
-        response = requests.request("GET", url, headers=headers)
+            "X-RapidAPI-Key": "26d9a3c8fbmshd1c8fc32ca8acc3p190a69jsn54f737b8e33b",
+            "X-RapidAPI-Host": "edamam-food-and-grocery-database.p.rapidapi.com"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
         recipe_data = response
     else:  # Request recipe Data
         response = recipe_data
@@ -63,18 +64,19 @@ def getrecipeAPI():
     return response
 
 
-"""API with Country Filter
+"""API with Filter
 Returns:
     String: Filter of API response
 """   
-def getCountry(filter):
+def getCategory(filter):
     # Request recipe Data
-    response = getrecipeAPI()
+    response = getRecipeAPI()
     # Look for Country    
-    countries = response.json().get('countries_stat')
-    for country in countries:  # countries is a list
-        if country["country_name"].lower() == filter.lower():  # this filters for country
-            return country
+    cats = response.json().get('parsed')
+    
+    for cat in cats:  # cats is a list
+        if cat["categoryLabel"].lower() == filter.lower():  # this filters for country
+            return cat
     
     return {"message": filter + " not found"}
 
@@ -82,20 +84,20 @@ def getCountry(filter):
 """Defines API Resources 
   URLs are defined with api.add_resource
 """   
-class recipeAPI:
+class RecipeAPI:
     """API Method to GET all recipe Data"""
     class _Read(Resource):
         def get(self):
-            return getrecipeAPI().json()
+            return getRecipeAPI().json()
         
-    """API Method to GET recipe Data for a Specific Country"""
-    class _ReadCountry(Resource):
+    """API Method to GET recipe Data for a Specific Category"""
+    class _ReadCategory(Resource):
         def get(self, filter):
-            return jsonify(getCountry(filter))
+            return jsonify(getCategory(filter))
     
     # resource is called an endpoint: base usr + prefix + endpoint
     api.add_resource(_Read, '/')
-    api.add_resource(_ReadCountry, '/<string:filter>')
+    api.add_resource(_ReadCategory, '/<string:filter>')
 
 
 """Main or Tester Condition 
@@ -109,19 +111,10 @@ if __name__ == "__main__":
     
     print("-"*30) # cosmetic separator
 
-    # This code looks for "world data"
-    response = getrecipeAPI()
-    print("World Totals")
-    world = response.json().get('world_total')  # turn response to json() so we can extract "world_total"
-    for key, value in world.items():  # this finds key, value pairs in country
-        print(key, value)
-
-    print("-"*30)
-
-    # This code looks for USA in "countries_stats"
-    country = getCountry("USA")
-    print("USA Totals")
-    for key, value in country.items():
+    # This code looks for Generic foods in "category"
+    gen_food = getCategory("meal")
+    print("meal")
+    for key, value in gen_food.items():
         print(key, value)
         
     print("-"*30)
